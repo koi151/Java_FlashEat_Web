@@ -7,6 +7,7 @@ import com.koi151.flasheat.entity.payload.request.SignUpRequest;
 import com.koi151.flasheat.repository.UserRepository;
 import com.koi151.flasheat.service.imp.LoginServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ public class LoginService implements LoginServiceImp {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public List<UserDTO> getAllUser() {
 
@@ -38,8 +43,8 @@ public class LoginService implements LoginServiceImp {
 
     @Override
     public boolean checkLogin(String username, String password) {
-        List<Users> userList = userRepository.findByUserNameAndPassword(username, password);
-        return !userList.isEmpty();
+        Users user = userRepository.findByUserName(username);
+        return passwordEncoder.matches(password, user.getPassword());
     }
 
     @Override

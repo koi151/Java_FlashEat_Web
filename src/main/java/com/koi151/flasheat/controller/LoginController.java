@@ -3,6 +3,7 @@ package com.koi151.flasheat.controller;
 import com.koi151.flasheat.entity.payload.ResponseData;
 import com.koi151.flasheat.entity.payload.request.SignUpRequest;
 import com.koi151.flasheat.service.imp.LoginServiceImp;
+import com.koi151.flasheat.utils.JwtUtilsHelper;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
@@ -20,6 +21,9 @@ public class LoginController {
     @Autowired
     LoginServiceImp loginServiceImp;
 
+    @Autowired
+    JwtUtilsHelper jwtUtilsHelper;
+
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestParam String username, @RequestParam String password){
         ResponseData responseData = new ResponseData();
@@ -27,10 +31,13 @@ public class LoginController {
         if(loginServiceImp.checkLogin(username, password)) {
             responseData.setDesc("Success");
             responseData.setData(true);
+            String token = jwtUtilsHelper.generateToken(username);
+            responseData.setData(token);
         } else {
             responseData.setDesc("Login failed");
             responseData.setStatus(400);
-            responseData.setData(false);
+            responseData.setData("");
+            responseData.setSuccess(false);
         }
 
         return new ResponseEntity<>(responseData, HttpStatus.OK);
