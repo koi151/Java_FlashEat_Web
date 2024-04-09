@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+**/application.properties*  # Includes all application.yml files (dev, test, etc.)
 
 ### STS ###
 .apt_generated

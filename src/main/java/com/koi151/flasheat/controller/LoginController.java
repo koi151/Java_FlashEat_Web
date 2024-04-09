@@ -1,13 +1,17 @@
 package com.koi151.flasheat.controller;
 
-import com.koi151.flasheat.entity.Users;
 import com.koi151.flasheat.entity.payload.ResponseData;
 import com.koi151.flasheat.entity.payload.request.SignUpRequest;
 import com.koi151.flasheat.service.imp.LoginServiceImp;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Encoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.crypto.SecretKey;
 
 @RestController
 @RequestMapping("/login")
