@@ -35,30 +35,13 @@ public class CustomFilterSecurity {
     }
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user1 = User.withUsername("user1")
-                .password(passwordEncoder().encode("123"))
-                .roles("USER")
-                .build();
-        UserDetails user2 = User.withUsername("user2")
-                .password("123456")
-                .roles("USER")
-                .build();
-        UserDetails admin = User.withUsername("admin")
-                .password("1234")
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user1, user2, admin);
-    }
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
       http.cors().disable()
               .csrf().disable()
               .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
               .and()
               .authorizeHttpRequests()
-              .requestMatchers("/login/**")
+              .requestMatchers("/login/**", "/restaurant/files/**")
               .permitAll()
               .anyRequest()
               .authenticated();
