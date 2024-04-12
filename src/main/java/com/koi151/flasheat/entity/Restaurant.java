@@ -1,7 +1,6 @@
 package com.koi151.flasheat.entity;
 
 import jakarta.persistence.*;
-import org.apache.catalina.User;
 
 import java.util.Date;
 import java.util.Set;
@@ -26,7 +25,7 @@ public class Restaurant {
     private String image;
 
     @Column(name = "is_freeship")
-    private String isFreeship;
+    private boolean isFreeship;
 
     @Column(name = "address")
     private String address;
@@ -118,11 +117,11 @@ public class Restaurant {
         this.image = image;
     }
 
-    public String getIsFreeship() {
+    public boolean getIsFreeship() {
         return isFreeship;
     }
 
-    public void setIsFreeship(String isFreeship) {
+    public void setIsFreeship(boolean isFreeship) {
         this.isFreeship = isFreeship;
     }
 
