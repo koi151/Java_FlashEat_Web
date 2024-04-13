@@ -19,10 +19,13 @@ public class Food {
     public String image;
 
     @Column(name = "time_ship")
-    public Date timeShip;
+    public String timeShip;
 
     @Column(name = "price")
     public double price;
+
+    @Column(name = "is_freeship")
+    public boolean isFreeship;
 
     @ManyToOne
     @JoinColumn(name = "cate_id")
@@ -33,6 +36,30 @@ public class Food {
 
     @OneToMany(mappedBy = "food")
     private Set<OrderItems> orderItemsList;
+
+    public boolean isFreeship() {
+        return isFreeship;
+    }
+
+    public void setFreeship(boolean freeship) {
+        isFreeship = freeship;
+    }
+
+    public FoodCategories getFoodCategories() {
+        return foodCategories;
+    }
+
+    public void setFoodCategories(FoodCategories foodCategories) {
+        this.foodCategories = foodCategories;
+    }
+
+    public Set<OrderItems> getOrderItemsList() {
+        return orderItemsList;
+    }
+
+    public void setOrderItemsList(Set<OrderItems> orderItemsList) {
+        this.orderItemsList = orderItemsList;
+    }
 
     public Set<OrderItems> getOrderItemList() {
         return orderItemsList;
@@ -86,11 +113,11 @@ public class Food {
         this.image = image;
     }
 
-    public Date getTimeShip() {
+    public String getTimeShip() {
         return timeShip;
     }
 
-    public void setTimeShip(Date timeShip) {
+    public void setTimeShip(String timeShip) {
         this.timeShip = timeShip;
     }
 
