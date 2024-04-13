@@ -40,10 +40,26 @@ public class Restaurant {
     private Set<Orders> orderList;
 
     @OneToMany(mappedBy = "restaurant")
-    private Set<MenuRestaurant> menuRestaurantList;
+    private Set<MenuRestaurant> menuRestaurantSet;
 
     @OneToMany(mappedBy = "restaurant")
     private Set<Promo> promoList;
+
+    public boolean isFreeship() {
+        return isFreeship;
+    }
+
+    public void setFreeship(boolean freeship) {
+        isFreeship = freeship;
+    }
+
+    public Set<MenuRestaurant> getMenuRestaurantSet() {
+        return menuRestaurantSet;
+    }
+
+    public void setMenuRestaurantSet(Set<MenuRestaurant> menuRestaurantSet) {
+        this.menuRestaurantSet = menuRestaurantSet;
+    }
 
     public Set<Promo> getPromoList() {
         return promoList;
@@ -58,18 +74,18 @@ public class Restaurant {
     }
 
     public Set<MenuRestaurant> getMenuRestaurantList() {
-        return menuRestaurantList;
+        return menuRestaurantSet;
     }
 
     public void setMenuRestaurantList(Set<MenuRestaurant> menuRestaurantList) {
-        this.menuRestaurantList = menuRestaurantList;
+        this.menuRestaurantSet = menuRestaurantList;
     }
 
     public Set<Orders> getOrderList() {
         return orderList;
     }
 
-    public Set<RatingRestaurant> getRatingRestaurant() {
+    public Set<RatingRestaurant> getRatingRestaurantSet() {
         return ratingRestaurant;
     }
 

@@ -54,4 +54,13 @@ public class RestaurantController {
                 .header(HttpHeaders.CONTENT_DISPOSITION,
                         "attachment; filename=\"" + resource.getFilename() + "\"").body(resource);
     }
+
+    @GetMapping("/getHomeRestaurants")
+    public ResponseEntity<?> getHomeRestaurant() {
+        ResponseData responseData = new ResponseData();
+
+        responseData.setData(restaurantServiceImp.getAllHomeRestaurant());
+
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
 }
