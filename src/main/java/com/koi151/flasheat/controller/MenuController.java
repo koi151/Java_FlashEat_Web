@@ -1,6 +1,5 @@
 package com.koi151.flasheat.controller;
 
-import com.koi151.flasheat.entity.FoodCategories;
 import com.koi151.flasheat.entity.payload.ResponseData;
 import com.koi151.flasheat.service.imp.MenuRestaurantImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Date;
 
 @RestController
 @RequestMapping("/menu")
@@ -36,5 +33,4 @@ public class MenuController {
 
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
-
 }

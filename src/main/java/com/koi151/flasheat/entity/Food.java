@@ -37,7 +37,7 @@ public class Food {
     @OneToMany(mappedBy = "food")
     private Set<OrderItems> orderItemsList;
 
-    public boolean isFreeship() {
+    public boolean getIsFreeship() {
         return isFreeship;
     }
 
