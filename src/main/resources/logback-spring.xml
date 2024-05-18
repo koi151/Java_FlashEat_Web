@@ -1,0 +1,41 @@
+<configuration>
+    <property name="LOGS" value="C:\Users\antho\Desktop\log" />
+
+<!--    Khai bao cau hinh log o man hinh console -->
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd} %-5level ${PID:-} %logger{40} : %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+<!--    Xuat log ra file voi dung luong toi da-->
+    <appender name="RollingFile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+<!--        ten file log-->
+        <file>${LOGS}/dev1.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd} %-5level ${PID:-} %logger{40} : %msg%n</Pattern>
+        </encoder>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Ten file zip -->
+            <fileNamePattern>${LOGS}/archived/dev1-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!-- LOG everything at INFO level -->
+    <root level="info">
+        <appender-ref ref="Console" />
+        <appender-ref ref="RollingFile" />
+    </root>
+</configuration>

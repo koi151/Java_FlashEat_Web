@@ -20,7 +20,3 @@ jwt:
 
 fileUpload:
   rootPath: C:\Users\antho\Desktop\uploads
-
-logging:
-  level:
-    root: trace
