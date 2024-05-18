@@ -20,4 +20,27 @@ public class OrderItems {
     @JoinColumn(name = "order_id", updatable = false, insertable = false)
     private Orders orders;
 
+    public KeyOrderItem getKeyOrderItem() {
+        return keyOrderItem;
+    }
+
+    public void setKeyOrderItem(KeyOrderItem keyOrderItem) {
+        this.keyOrderItem = keyOrderItem;
+    }
+
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
+    public Orders getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Orders orders) {
+        this.orders = orders;
+    }
 }

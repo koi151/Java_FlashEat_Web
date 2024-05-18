@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
-
 @RestController
 @RequestMapping("/restaurant")
 public class RestaurantController {
@@ -63,4 +61,13 @@ public class RestaurantController {
 
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
+
+    @GetMapping("/detail")
+    public ResponseEntity<?> getDetailRestaurant(@RequestParam int id) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(restaurantServiceImp.getDetailRestaurant(id));
+
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
 }

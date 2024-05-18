@@ -4,15 +4,12 @@ import com.koi151.flasheat.entity.payload.ResponseData;
 import com.koi151.flasheat.entity.payload.request.SignUpRequest;
 import com.koi151.flasheat.service.imp.LoginServiceImp;
 import com.koi151.flasheat.utils.JwtUtilsHelper;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Encoders;
-import io.jsonwebtoken.security.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.crypto.SecretKey;
 
 @RestController
 @RequestMapping("/login")
@@ -24,9 +21,18 @@ public class LoginController {
     @Autowired
     JwtUtilsHelper jwtUtilsHelper;
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestParam String username, @RequestParam String password){
         ResponseData responseData = new ResponseData();
+
+        logger.trace("Checking trace log");
+        logger.debug("Checking debug log");
+        logger.info("Checking info log");
+        logger.warn("Checking warn log");
+        logger.error("Checking error log");
+
 
         if(loginServiceImp.checkLogin(username, password)) {
             responseData.setDesc("Success");

@@ -1,7 +1,6 @@
 package com.koi151.flasheat.controller;
 
 import com.koi151.flasheat.service.imp.UserServiceImp;
-import com.koi151.flasheat.utils.JwtUtilsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ public class UserController {
 
     @Autowired
     UserServiceImp userServiceImp;
-
 
     @GetMapping("")
     public ResponseEntity<?> getAllUser() {

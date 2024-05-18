@@ -15,7 +15,6 @@ public interface RestaurantServiceImp {
             boolean resIsFreeShip,
             String resOpenDate
     );
-
     List<RestaurantHomeDTO> getAllHomeRestaurant();
-
+    RestaurantHomeDTO getDetailRestaurant(int id);
 }

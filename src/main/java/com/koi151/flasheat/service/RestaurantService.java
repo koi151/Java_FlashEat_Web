@@ -1,6 +1,10 @@
 package com.koi151.flasheat.service;
 
+import com.koi151.flasheat.dto.CategoryDTO;
+import com.koi151.flasheat.dto.MenuDTO;
 import com.koi151.flasheat.dto.RestaurantHomeDTO;
+import com.koi151.flasheat.entity.Food;
+import com.koi151.flasheat.entity.MenuRestaurant;
 import com.koi151.flasheat.entity.RatingRestaurant;
 import com.koi151.flasheat.entity.Restaurant;
 import com.koi151.flasheat.repository.RestaurantRepository;
@@ -13,10 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class RestaurantService implements RestaurantServiceImp {
@@ -79,6 +80,46 @@ public class RestaurantService implements RestaurantServiceImp {
         }
 
         return restaurantHomeDTOList;
+    }
+
+    @Override
+    public RestaurantHomeDTO getDetailRestaurant(int id) {
+        Optional<Restaurant> restaurant = restaurantRepository.findById(id);
+        RestaurantHomeDTO restaurantHomeDTO = new RestaurantHomeDTO();
+
+        if (restaurant.isPresent()) {
+            Restaurant restData = restaurant.get();
+            List<CategoryDTO> categoryDTOList = new ArrayList<>();
+
+            restaurantHomeDTO.setImage(restData.getImage());
+            restaurantHomeDTO.setTitle(restData.getTitle());
+            restaurantHomeDTO.setOpenDate(restData.getOpenDate());
+            restaurantHomeDTO.setDescription(restData.getDescription());
+            restaurantHomeDTO.setAddress(restData.getAddress());
+            restaurantHomeDTO.setRatingPoint(calculateAverageRatingPoint(restData.getRatingRestaurantSet()));
+
+            // category
+            for (MenuRestaurant menuRestaurant: restData.getMenuRestaurantList()) {
+                List<MenuDTO> menuDTOList = new ArrayList<>();
+                CategoryDTO categoryDTO = new CategoryDTO();
+                categoryDTO.setName(menuRestaurant.getFoodCategory().getName());
+
+                // menu
+                for (Food food: menuRestaurant.getFoodCategory().getListFood()) {
+                    MenuDTO menuDTO = new MenuDTO();
+
+                    menuDTO.setImage(food.getImage());
+                    menuDTO.setTitle(food.getTitle());
+                    menuDTO.setFreeShip(food.getIsFreeship());
+
+                    menuDTOList.add(menuDTO);
+                }
+                categoryDTO.setMenus(menuDTOList);
+                categoryDTOList.add(categoryDTO);
+            }
+            restaurantHomeDTO.setCategoryList(categoryDTOList);
+        }
+        return restaurantHomeDTO;
     }
 
     public double calculateAverageRatingPoint(Set<RatingRestaurant> ratingRestaurantSet) {

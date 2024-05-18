@@ -1,6 +1,7 @@
 package com.koi151.flasheat.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class RestaurantHomeDTO {
     private int id;
@@ -10,8 +11,26 @@ public class RestaurantHomeDTO {
     private String address;
     private Double ratingPoint;
     private boolean isFreeShip;
+    private Date openDate;
     private String image;
     private Date createdDate;
+    List<CategoryDTO> categoryList;
+
+    public List<CategoryDTO> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<CategoryDTO> categoryList) {
+        this.categoryList = categoryList;
+    }
+
+    public Date getOpenDate() {
+        return openDate;
+    }
+
+    public void setOpenDate(Date openDate) {
+        this.openDate = openDate;
+    }
 
     public String getSubTitle() {
         return subTitle;
